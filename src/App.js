@@ -2,7 +2,18 @@ import React, { Component } from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
 import Button from '@material-ui/core/Button';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import About from './components/About';
 
+function Index() {
+  return <h2>Home</h2>;
+}
+
+
+
+function Users() {
+  return <h2>Users</h2>;
+}
 
 const theme = createMuiTheme({
   palette: {
@@ -15,17 +26,28 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider theme={theme}>
-        <div className="App">
-          <header className="App-header">
+        <Router>
+          <div>
+            <nav>
+              <ul>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/about/">About</Link>
+                </li>
+                <li>
+                  <Link to="/users/">Users</Link>
+                </li>
+              </ul>
+            </nav>
 
-          <Button color="primary">Primary</Button>
-      <Button color="secondary">Secondary</Button>
-
-        </header>
-        </div>
+            <Route path="/" exact component={Index} />
+            <Route path="/about/" component={About} />
+            <Route path="/users/" component={Users} />
+          </div>
+        </Router>
       </MuiThemeProvider>
-
-
     );
   }
 }
